@@ -2,9 +2,7 @@
 return array(
     'extends' => 'root',
     'css' => array(
-        'custom.css',
         'slider.css',
-        'screen.css',
         'print.css:print'
     ),
     'js' => array(
