@@ -1,0 +1,27 @@
+<?
+    // Set page title.
+    $this->headTitle($this->translate('Book Bag'));
+
+    // Set up breadcrumbs:
+    $this->layout()->breadcrumbs = $this->getLastSearchLink($this->transEsc('Search'), '', '<span>&gt;</span>') .
+        '<em>' . $this->transEsc('Book Bag') . '</em>';
+?>
+<?=$this->flashmessages()?>
+<form action="<?=$this->url('cart-home')?>" method="post"  name="cartForm">
+  <? if (!$this->cart()->isEmpty()): ?>
+    <div class="bulkActionButtons">
+      <input type="checkbox" class="selectAllCheckboxes left" name="selectAll" id="cartCheckboxSelectAll"/> <label for="cartCheckboxSelectAll" class="left"><?=$this->transEsc('select_page')?></label>
+      <input type="submit" class="fav left button" name="saveCart" value="<?=$this->transEsc('bookbag_save_selected')?>" title="<?=$this->transEsc('bookbag_save')?>"/>
+      <input type="submit" class="mail left button" name="email" value="<?=$this->transEsc('bookbag_email_selected')?>" title="<?=$this->transEsc('bookbag_email')?>"/>
+      <? $exportOptions = $this->export()->getBulkOptions(); if (count($exportOptions) > 0): ?>
+        <input type="submit" class="export left button" name="export" value="<?=$this->transEsc('bookbag_export_selected')?>" title="<?=$this->transEsc('bookbag_export')?>"/>
+      <? endif; ?>
+      <input type="submit" class="print left button" name="print" value="<?=$this->transEsc('bookbag_print_selected')?>" title="<?=$this->transEsc('print_selected')?>"/>
+      <input type="submit" class="bookbagDelete left button" name="delete" value="<?=$this->transEsc('bookbag_delete_selected')?>" title="<?=$this->transEsc('bookbag_delete')?>"/>
+      <input type="submit" class="bookbagEmpty left button" name="empty" value="<?=$this->transEsc('Empty Book Bag')?>" title="<?=$this->transEsc('Empty Book Bag')?>"/>
+      <div class="clearer"></div>
+    </div>
+  <? endif; ?>
+
+  <?=$this->render('cart/contents.phtml')?>
+</form>

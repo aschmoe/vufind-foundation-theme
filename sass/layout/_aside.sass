@@ -1,0 +1,45 @@
+// Non-modular or client styles for asides or sidebars.
+
+.l-sidebar
+
+.sidegroup
+  & > h2,
+  & > h3,
+  & > h4
+    background: $gray
+    margin-top: 0
+    padding-bottom: 0.35em
+    padding-top: 0.35em
+
+  & > h2
+    +expand-and-padding(true, $h2-font-size)
+
+  & > h3
+    +expand-and-padding(true, $h3-font-size)
+
+  & > h4
+    +expand-and-padding(true, $h4-font-size)
+
+  .side-nav
+    a
+      display: inline-block
+
+.sidebar
+  padding-top: 1em
+
+  ul 
+    +list-clear
+
+.sidebar-first
+
+.sidebar-second
+
+
+// *
+// * Media Queries
+// *
+// ******************************************************
+
++respond($small)
+  .sidegroup
+    +column-padding()

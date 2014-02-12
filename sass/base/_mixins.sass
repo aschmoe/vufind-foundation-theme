@@ -1,0 +1,402 @@
+// @file
+// Place your mixins here. Feel free to roll your own mixins. Or nuke what is
+// currently here.
+
+// Current version of subnav in foundation gem doesn't allow
+// for li's for subnav
+=sub-nav-li($font-color: $sub-nav-font-color, $font-size: $sub-nav-font-size, $active-bg: $sub-nav-active-bg)
+  display: block
+  width: auto
+  overflow: hidden
+  margin: $sub-nav-list-margin
+  padding-top: $sub-nav-list-padding-top
+  margin-#{$opposite-direction}: 0
+  margin-#{$default-float}: emCalc(-9)
+  dt,
+  dd,
+  li
+    float: $default-float
+    display: inline
+    margin-#{$default-float}: emCalc(9)
+    margin-bottom: emCalc(10)
+    font-weight: $sub-nav-font-weight
+    font-size: $font-size
+    a
+      color: $font-color
+      text-decoration: $sub-nav-text-decoration
+    &.active a
+      +radius($sub-nav-border-radius)
+      font-weight: $sub-nav-active-font-weight
+      background: $active-bg
+      padding: $sub-nav-active-padding
+      cursor: $sub-nav-active-cursor
+      color: $sub-nav-active-color
+    @if $sub-nav-item-divider != ""
+      margin-#{$default-float}: 0
+      &:before
+        content: #{$sub-nav-item-divider}
+        margin: 0 $sub-nav-item-divider-margin
+      &:first-child:before
+        content: ""
+        margin: 0
+
+// Flight theme mixins that get included above
+//
+// @mixin fixed-background($image: url(../images/bg.jpg), $color: #fff)
+// @mixin fade-background($start, $stop, $position: top)
+// @mixin auto-fade-background($color, $position: top)
+// @mixin auto-fade-background-hover($color)
+// @mixin and-a($color)
+// @mixin link-clear($color)
+// @mixin clearfix
+// @mixin list-clear
+// @mixin list-float($float: left, $margin-horizontal: 10px, $margin-vertical: 0)
+// @mixin centered()
+// @mixin max-width-center($width: $grid-max-width)
+// @mixin respond($media)
+// @mixin sprite($left, $top, $url: url(../images/sprite.png))
+// @mixin sprite-block($width, $height, $left, $top, $url: url(../images/sprite.png?a))
+// @mixin get-sprite($map, $sprite, $offset-x: 0, $offset-y: 0, $repeat: no-repeat, $height: true, $width: true, $hover: false)
+// @mixin all-form-inputs()
+// @mixin full-width-form()
+
+//***********************************
+// Sprite Definitions
+//
+// Create folder in images/ called icons/ place any .png files in there,
+// and reference them by their file name
+//***********************************
+
+//@import "compass/utilities/sprites/base";
+
+//$disable-magic-sprite-selectors: true;
+
+// Use these lines for traditional compass sprites
+// see http://compass-style.org/help/tutorials/spriting/
+//@import "icons/*.png";
+
+//@include all-icons-sprites;
+
+// Use this style for sprites inside media queries
+// for use with +get-sprite() mixin
+//$icons: sprite-map("icons/*.png");
+
+//***********************************
+// Silent Extends
+//
+// Silent extends help cut down on the length of compiled css by routing
+// each call to the extend at the top of the css file.
+//
+// They cannot as of SASS 3.2.5 be used within media queries
+//
+//***********************************
+
+// general
+// -----------------------------------
+// use the +e() mixin
+
+%hide
+  display: none
+
+%show
+  display: block
+
+%offscreen
+  position: absolute
+  left: -10000px
+  top: auto
+  width: 1px
+  height: 1px
+  overflow: hidden
+  display: inline
+
+// backgrounds
+// -----------------------------------
+// use the +b() mixin
+
+%background_reset
+  background: transparent
+
+// text colors
+// -----------------------------------
+// use the +c() mixin
+
+%color_normal
+  color: $body-font-color
+
+%color_link
+  color: $anchor-font-color
+
+%color_hover
+  color: $anchor-font-color-hover
+
+// fonts
+// -----------------------------------
+// use the +f() mixin
+
+%font_normal
+  font-family: $body-font-family
+  font-style: $body-font-weight
+  font-weight: $body-font-weight
+
+%font_reset
+  @extend %font_normal
+  font-size: $base-font-size
+  line-height: $base-line-height
+
+%font_reset_full
+  @extend %font_reset
+  color: $body-font-color
+  text-transform: none
+
+// headers
+// -----------------------------------
+// use the +h() mixin
+
+%header_core
+  font-family: $header-font-family
+  font-weight: $header-font-weight
+  font-style: $header-font-style
+  color: $header-font-color
+  text-rendering: $header-text-rendering
+  margin-top: $header-top-margin
+  margin-bottom: $header-bottom-margin
+  line-height: $header-line-height
+
+%header_1
+  @extend %header_core
+  font-size: $h1-font-size
+
+%header_2
+  @extend %header_core
+  font-size: $h2-font-size
+
+%header_3
+  @extend %header_core
+  font-size: $h3-font-size
+
+%header_4
+  @extend %header_core
+  font-size: $h4-font-size
+
+%header_5
+  @extend %header_core
+  font-size: $h5-font-size
+
+%header_6
+  @extend %header_core
+  font-size: $h6-font-size
+
+// general extend
+// use: +e(hide)
+=e($extend)
+  @extend %#{$extend}
+
+// extend for backgrounds
+// use: +b(reset)
+=b($extend)
+  @extend %background_#{$extend}
+
+// extend for text color
+// use: +c(normal)
+=c($extend)
+  @extend %color_#{$extend}
+
+// extend for font styles
+// use: +f(reset)
+=f($extend)
+  @extend %font_#{$extend}
+
+// extend for header styles
+// use: +h(1)
+=h($extend)
+  @extend %header_#{$extend}
+
+
+//***********************************
+// Typography
+//
+//***********************************
+
+// simple list clear, does not assume
+@mixin list-clear()
+  list-style: none
+  padding: 0
+  margin: 0
+
+// simple list float, does not assume
+@mixin list-float()
+  +list-clear-light()
+
+  li
+    display: inline-block
+
+
+//***********************************
+// Helpers
+//
+//***********************************
+
+@mixin before-as-image($display: block, $direction: false, $amount: 0)
+  content: ""
+  display: $display
+
+  @if $direction
+    #{$direction}: $amount
+    position: absolute
+
+// Grid functions
+
+// get column withd without percentage
+@function unitlessGridCalc($colNumber, $columns: $total-columns)
+  @return ($colNumber / $columns)
+
+// gets em-compensated value (useful for headers, buttons)
+@function compensate-size($size, $element, $base: emCalc($em-base))
+  @return $size * ($base/$element)
+
+// add / remove column padding 
+
+@mixin column-padding($half: true, $modify: false)
+
+  $size: 0
+
+  @if $half == true
+    $size: $column-gutter/2
+
+  @else if $half
+    $size: $half
+
+  @if $half == true
+    $size: $column-gutter/2
+
+  @if $modify
+    $size: compensate-size($size, $modify)
+
+  padding-left: $size
+  padding-right: $size
+
+
+// expand row
+
+@mixin expand-row($half: true, $modify: false)
+  $size: 0
+
+  @if $half == true
+    $size: $column-gutter/2
+
+  @else if $half
+    $size: $half
+
+  @if $half == true
+    $size: $column-gutter/2
+
+  @if $modify
+    $size: compensate-size($size, $modify)
+
+  margin-left: -($size)
+  margin-right: -($size)
+
+@mixin expand-and-padding($half: true, $modify: false)
+  +column-padding($half, $modify)
+  +expand-row($half, $modify)
+
+// border goes on rows, constrains to column width
+
+@mixin nice-row-border($margin: $column-gutter/2, $padding: 1em, $border: 1px solid $gray, $direction: bottom)
+  $child: last-child
+  $selector: after
+
+  @if $direction == top
+    $child: first-child
+    $selector: before
+
+  &:#{$selector}
+    +before-as-image(block)
+    border-#{$direction}: $border
+    margin-left: $margin
+    margin-right: $margin
+
+    $pad-dir: top
+
+    @if $direction == top
+      $pad-dir: bottom
+    
+    padding-#{$pad-dir}: $padding
+    margin-#{$direction}: $padding
+
+  &:#{$child}:#{$selector}
+    margin-#{$direction}: $padding
+    border: 0
+
+
+
+
+//***********************************
+// Animations
+//
+// for css3 spinner and other animations
+//***********************************
+
+$animation-time: 0.6s !default
+
+=rotation($time: $animation-time)
+  -webkit-animation: rotation $time infinite linear
+  -moz-animation: rotation $time infinite linear
+  -o-animation: rotation $time infinite linear
+  animation: rotation $time infinite linear
+
+=rotation-init
+  @-webkit-keyframes rotation
+    from
+      -webkit-transform: rotate(0deg)
+    to
+      -webkit-transform: rotate(359deg)
+
+  @-moz-keyframes rotation
+    from
+      -moz-transform: rotate(0deg)
+    to
+      -moz-transform: rotate(359deg)
+
+  @-o-keyframes rotation
+    from
+      -o-transform: rotate(0deg)
+    to
+      -o-transform: rotate(359deg)
+
+  @keyframes rotation
+    from
+      transform: rotate(0deg)
+    to
+      transform: rotate(359deg)
+
+=spinner-active($border-color: $animation-rotation-border-color, $time: $animation-time)
+  +rotation($time)
+  &:before
+    border-top-color: $border-color
+
+=spinner-core($dimensions, $border-color-inactive: $animation-rotation-border-color-inactive, $border-width: $animation-rotation-border-width)
+  $width: nth($dimensions, 1)
+  $height: $width
+  @if length($dimensions) == 2
+    $height: nth($dimensions, 2)
+  height: $height
+  width: $width
+  display: inline-block
+  position: relative
+  border: $border-width solid $border-color-inactive
+  border-radius: 100%
+  &:before
+    content: ""
+    display: block
+    position: absolute
+    left: -$border-width
+    top: -$border-width
+    height: $height
+    width: $width
+    border-top: $border-width solid $border-color-inactive
+    border-left: $border-width solid transparent
+    border-bottom: $border-width solid transparent
+    border-right: $border-width solid transparent
+    border-radius: 100%

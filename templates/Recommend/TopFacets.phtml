@@ -1,0 +1,34 @@
+<?
+  $topFacetSet = $this->recommend->getTopFacetSet();
+  $topFacetSettings = $this->recommend->getTopFacetSettings();
+?>
+<? if (isset($topFacetSet)): ?>
+  <? foreach($topFacetSet as $title => $cluster): ?>
+    <div class="authorbox panel">
+      <h5><strong><?=$this->transEsc($cluster['label'])?></strong><?=$this->transEsc("top_facet_suffix") ?></h5>
+      <div class="row">
+        <? $iter=1;$corner=$topFacetSettings['rows']*$topFacetSettings['cols']; ?>
+        <? foreach($cluster['list'] as $thisFacet): ?>
+          <? if ($iter == $corner+1): ?>
+            <div class="toggle-more columns"><a class="clearfix" id="more<?=$this->escapeHtml($title)?>" href="#" onclick="moreFacets('<?=$this->escapeHtml($title)?>'); return false;"><?=$this->transEsc('more') ?> ...</a></div>
+            <div class="offscreen" id="narrowGroupHidden_<?=$this->escapeHtml($title)?>">
+            <div class="columns"><h5><strong><?=$this->transEsc('top_facet_additional_prefix').$this->transEsc($cluster['label']) ?></strong><?=$this->transEsc("top_facet_suffix") ?></h5></div>
+          <? endif; ?>
+          <? if ($iter % $topFacetSettings['cols'] == 1): ?><br/><? endif; ?>
+          <div class="columns large-4">
+            <? if ($thisFacet['isApplied']): ?>
+              <?=$this->escapeHtml($thisFacet['displayText'])?> <img src="<?=$this->imageLink('silk/tick.png')?>" alt="<?=$this->transEsc('Selected') ?>"/>
+            <? else: ?>
+              <a href="<?=$this->currentPath().$this->recommend->getResults()->getUrlQuery()->addFacet($title, $thisFacet['value'])?>"><?=$this->escapeHtml($thisFacet['displayText'])?></a> (<?=$thisFacet['count'] ?>)
+            <? endif; ?>
+          </div>
+          <? if (count($cluster['list']) > $corner && $iter == count($cluster['list'])): ?>
+            <div class="toggle-more columns"><a class="clearfix" href="#" onclick="lessFacets('<?=$title ?>'); return false;"><?=$this->transEsc('less') ?> ...</a></div>
+            </div>
+          <? endif; ?>
+          <? $iter++; ?>
+        <? endforeach; ?>
+      </div>
+    </div>
+  <? endforeach; ?>
+<? endif; ?>

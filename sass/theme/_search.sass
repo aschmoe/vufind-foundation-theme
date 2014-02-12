@@ -1,0 +1,76 @@
+
+// Result listing
+// ------------------------------------------------------
+
+.authorbox
+  .toggle-more
+    clear: both
+
+  .columns
+    margin-bottom: 0.5em
+
+.recordSet
+  +list-clear
+
+li.result
+  +nice-row-border(0)
+
+  .recordNumber
+    display: inline-block
+    float: left
+    padding-left: $column-gutter/2
+    width: $column-gutter*2
+
+  .recordId
+    margin-left: $column-gutter
+
+
+// Inline Listings
+//--------------------------------------------------
+
+form .panel,
+.panel form,
+.resulthead form
+  label, input, select, .custom.dropdown
+    margin-bottom: 0
+
+  label
+    font-size: 1em
+
+.panel form,
+.resulthead form
+  margin-bottom: 0
+
+.resulthead form
+  label
+    float: left
+    line-height: 1.4em
+
+  &.custom
+    line-height: 1.8em
+
+.resulthead form 
+  label
+    margin-left: -3em
+
+.resulthead
+  line-height: 1.4em
+  margin-bottom: 1em
+
+// button / link bars
+
+div.bulkActionButtons
+  line-height: 1.7em
+
+  input, 
+  label, 
+  span
+    margin-right: emCalc(10)
+
+  input
+    margin-top: 0.4em
+
+.searchtools
+  strong,
+  a
+    margin-right: emCalc(10)

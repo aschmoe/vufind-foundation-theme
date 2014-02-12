@@ -1,0 +1,53 @@
+
+
+// Record Pages page
+// ------------------------------------------------------
+
+// Bibliography area
+table.citation
+  th
+    text-align: left
+
+
+#tabnav
+  border-bottom: $section-border-style $section-border-size $section-border-color
+  margin-bottom: $section-bottom-margin
+  ul
+    margin: 0 0 -1px 0
+    padding-left: 0.5em
+    li
+      background-color: $section-title-bg
+      cursor: $cursor-pointer-value
+      border: $section-border-style $section-border-size $section-border-color
+      display: inline-block
+      a
+        padding: $section-title-padding
+        color: $section-title-color
+        font-size: $section-font-size
+        background: none
+        display: inline-block
+      &:hover
+        background-color: $section-title-bg-hover
+      &.active
+        background: $section-title-bg-active-tabs
+        border-bottom-color: $section-title-bg-active-tabs
+        a
+          color: $section-title-color-active
+
+
+
+// *
+// * Media Queries
+// *
+// ******************************************************
+
++respond($small)
+
+  // Record Pages page
+  // ------------------------------------------------------
+
+  // Bibliography area
+  table.citation
+    
+    .recordsubcontent &
+      min-width: 0

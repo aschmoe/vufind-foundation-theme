@@ -1,0 +1,33 @@
+// Unravel or override vufind here.
+
+.offscreen
+  // hide elements
+  +e(offscreen)
+
+.groupSearchHolder
+  clear: both
+
+.clearfix
+  +clearfix
+
+// context helt table
+table#contextHelp 
+  z-index: 1
+  display: none
+  position: absolute
+  border-spacing: 0
+  border-collapse: collapse
+  max-width: 400px
+  top: 0
+
+
+// Common colors, icons, ect
+//------------------------------------------------------
+
+//.add i,
+.available
+  color: $success-color
+
+//.delete i,
+.checkedout
+  color: $alert-color
