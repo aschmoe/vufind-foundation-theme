@@ -26,7 +26,13 @@ module.exports = function (grunt) {
         tasks: [
           'jshint',
         ]
-      }
+      },
+      ie: {
+        files: ['css/*.css', '!css/ie*.css'],
+        tasks: [
+          'stripmq'
+        ]
+      },
     },
     compass: {
       dist: {
@@ -44,11 +50,26 @@ module.exports = function (grunt) {
         '!js/{,**/}*.min.js'
       ]
     },
+    stripmq: {
+      options: {
+        stripBase: true,
+        minWidth: 641,
+        maxWidth: 1280
+      },
+      files: {
+        src: [
+          'css/custom.css',
+        ],
+        dest: 'css/ie-mq.css'
+      },
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-stripmq');
   grunt.loadNpmTasks('grunt-contrib-jshint');
 
-  grunt.registerTask('default', ['watch', 'compass', 'jshint']);
+  grunt.registerTask('default', ['watch', 'stripmq', 'compass', 'jshint']);
 };
+
